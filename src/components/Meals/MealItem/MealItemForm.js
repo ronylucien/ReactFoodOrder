@@ -2,7 +2,7 @@ import classes from './MealItemForm.module.css';
 import Input from '../../UI/Input';
 import {useRef} from 'react';
 import { useDispatch } from 'react-redux';
-import { cartActions} from '../../../store/index';
+import { cartActions} from '../../../store/cart-store';
 
 const MealItemForm = props => {
 
@@ -13,7 +13,6 @@ const MealItemForm = props => {
     const submitHandler = event => {
         event.preventDefault();
         dispatch(cartActions.addToCart({...props.meal, qty : amountRef.current.getValue()}));
-        //dispatch({type:'addToCart', meal:});
     }
 
 

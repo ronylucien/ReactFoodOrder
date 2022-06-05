@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import CartIcon from '../Cart/CartIcon';
 import classes from './HeaderCartButton.module.css';
 import {useDispatch, useSelector} from 'react-redux';
-import {modalActions} from '../../store/index';
+import {modalActions} from '../../store/ui-store';
 
 const HeaderCartButton = () => {
     
