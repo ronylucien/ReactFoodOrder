@@ -1,14 +1,12 @@
 import classes from './Cart.module.css';
 import Modal from '../UI/Modal';
-import { Fragment, useCallback, useEffect, useState } from 'react';
+import { Fragment, useState } from 'react';
 import CartItem from './CartItem';
 import Checkout from './Checkout';
 import useHttp from '../../hooks/use-http';
 import { useSelector, useDispatch } from 'react-redux';
 import { modalActions } from '../../store/ui-store';
 import { cartActions } from '../../store/cart-store';
-
-let isFirstLoad = true;
 
 const getReqConfig = (userData, meals) => {
     return {
@@ -19,14 +17,7 @@ const getReqConfig = (userData, meals) => {
     }
 }
 
-const getPutReqConfig = (cartItems) => {
-    return {
-        url: 'https://reactcourse-92de6-default-rtdb.firebaseio.com/cart.json',
-        method: 'PUT',
-        headers: { 'content-type': 'application/json' },
-        body: { items : cartItems }
-    }
-}
+
 
 const Cart = () => {
 
@@ -38,18 +29,6 @@ const Cart = () => {
     const onRemoveHandler = id => {
         dispatch(cartActions.removeFromCart(id));
     }
-
-    const afterCartPersisted = useCallback(() => {}, []);
-    const { sendRequest: persistCart } = useHttp(afterCartPersisted);
-    
-    useEffect(() => {
-        console.log('Effect running', isFirstLoad);
-        if(!isFirstLoad){
-            persistCart(getPutReqConfig(cartItems));
-        }else{            
-            isFirstLoad = false;
-        }
-    }, [persistCart, cartItems]);
 
     const onAddHandler = item => {
         dispatch(cartActions.addToCart({ ...item, qty: 1 }));

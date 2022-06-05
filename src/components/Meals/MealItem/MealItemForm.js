@@ -4,6 +4,7 @@ import {useRef} from 'react';
 import { useDispatch } from 'react-redux';
 import { cartActions} from '../../../store/cart-store';
 
+
 const MealItemForm = props => {
 
     const amountRef = useRef();
@@ -14,7 +15,6 @@ const MealItemForm = props => {
         event.preventDefault();
         dispatch(cartActions.addToCart({...props.meal, qty : amountRef.current.getValue()}));
     }
-
 
     return (
         <form className={classes.form} onSubmit={submitHandler}>
